@@ -1,0 +1,55 @@
+// The famous media object
+// http://www.stubbornella.org/content/2010/06/25/the-media-object-saves-hundreds-of-lines-of-code/
+
+@import "overflowhidden";
+
+$media-default-direction: left !default;
+$media-default-spacing: rhythm() !default;
+
+@mixin media__bd {
+  display: block;
+
+  @include overflowhidden;
+}
+
+@mixin media__img($direction: $media-default-direction, $spacing: $media-default-spacing, $variation: false) {
+
+  float: floatdirection($direction);
+
+  @if $spacing {
+    margin-#{floatdirection(floatinverse($direction))}: $spacing;
+  }
+
+  & img {
+    display: block;
+  }
+}
+
+@mixin media($directions: $media-default-direction, $spacing: $media-default-spacing, $default-direction: $media-default-direction){
+
+  @at-root {
+
+    &,
+    &__bd {
+      @include media__bd;
+    }
+
+    
+    @each $direction in $directions {
+      @if length($directions) > 1 and $direction != $default-direction {
+        &__img--#{$direction} {
+          @include media__img($direction, $spacing, true);
+        }
+      }
+      @else {
+        &__img {
+          @include media__img($direction, $spacing);
+        }
+      }
+    }
+  }
+}
+
+%media {
+  @include media;
+}

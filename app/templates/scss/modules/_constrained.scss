@@ -1,0 +1,7 @@
+.constrained {
+  @extend %clearfix;
+
+  margin: 0 auto;
+  padding: 0 rhythm(2);
+  max-width: 1200px;
+}

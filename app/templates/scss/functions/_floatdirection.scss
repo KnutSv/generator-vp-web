@@ -1,0 +1,10 @@
+$direction:  ltr !default;
+
+@function floatdirection($float: left, $dir: $direction) {
+  @if ($dir == ltr and $float == left) or ($dir == rtl and $float == right) {
+    @return left;
+  }
+  @else {
+    @return right;
+  }
+}

@@ -1,0 +1,23 @@
+textarea {
+  display: block;
+  padding: rhythm(1, $base-font-size, 1);
+  border: 1px solid $gray-btn-border;
+  background-color: $white;
+  width: 100%;
+  max-width: 100%;
+
+  font-family: $base-font-family-sans-serif;
+
+  @include box-sizing(border-box);
+  @include adjust-leading-to(3);
+
+  &:hover,
+  &:focus {
+    border-color: $blue;
+    background-color: lighten($white, 5%);
+  }
+
+  &:focus {
+    outline: 1px solid $blue;
+  }
+}

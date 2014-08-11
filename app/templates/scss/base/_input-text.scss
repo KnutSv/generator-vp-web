@@ -1,0 +1,53 @@
+$input-text-types: text search password email number !default;
+
+@mixin input-text($font-size: $base-font-size) {
+  display: block;
+  padding: 0 rhythm(1, $font-size, 1);
+  height: rhythm(5, $font-size);
+  border: 1px solid $gray-btn-border;
+  background-color: $white;
+  max-width: 100%;
+
+  font-family: $base-font-family-sans-serif;
+
+  @include adjust-leading-to(5);
+
+  &:hover,
+  &:focus {
+    border-color: $blue;
+    background-color: lighten($white, 5%);
+  }
+
+  &:focus {
+    outline: 1px solid $blue;
+  }
+}
+
+%input-text {
+  @include input-text;
+}
+
+%input-text-fullwidth {
+  width: 100%;
+
+  @include box-sizing(border-box);
+}
+
+@each $input-text-type in $input-text-types {
+  input[type="#{$input-text-type}"] {
+    @extend %input-text;
+  }
+}
+
+// Use if IE6 support is needed
+// IE6 does not support CSS-type selectors
+// Requires ".input-text"-class to be added in markup
+@include for-legacy-browser('ie', '6') {
+  .input-text {
+    @extend %input-text;
+  }
+}
+
+input[size='70'] {
+  @extend %input-text-fullwidth;
+}

@@ -1,0 +1,36 @@
+/*
+ * Grid settings with SUSY
+ * http://susydocs.oddbird.net/en/latest/
+ */
+
+$susy: (
+  flow: ltr,                        // rtl | ltr
+  math: fluid,                      // fluid | static
+  output: float,
+  gutter-position: split,           // float | isolate
+  container: auto,                  // <length> | auto
+  container-position: center,       // left | center | right | <length> [*2]
+  columns: 4,                      // <number> | <list>
+  gutters: .25,                     // <ratio>
+  column-width: false,              // <length> | false/null
+  global-box-sizing: content-box,   // before | after | split | inside | inside-static
+  last-flow: to,                    // from | to
+  debug: (
+    image: hide,                    // show | hide | show-columns | show-baseline
+    color: rgba(#66f, .25),         // <color>
+    output: background,             // background | overlay
+    toggle: top right,              // right | left and top | bottom
+  ),
+  use-custom: (
+    background-image: true,         // <boolean>
+    background-options: false,      // <boolean>
+    box-sizing: false,              // <boolean>
+    clearfix: true,                 // <boolean>
+    rem: true,                      // <boolean>
+  )
+);
+
+$susy-large: (
+  columns: 12,
+  gutters: .5
+);

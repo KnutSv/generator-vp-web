@@ -1,0 +1,2 @@
+$sprites: sprite-map("sprite/@1x/**/*.png", $layout: smart);     // import 1x sprites
+$sprites2x: sprite-map("sprite/@2x/**/*.png", $layout: smart);   // import 2x sprites

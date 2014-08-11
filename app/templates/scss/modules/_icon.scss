@@ -1,0 +1,43 @@
+// Create an array of icons that you want to create icon classes for
+// Each icon need to have a file placed in
+// 1. images/sprite/@1x/
+// 2. images/sprite/@2x/
+// 
+// List the file name without file extension in the $icons array
+// my-icon.png => my-icon
+// my-other-icon.png => my-other-icon
+//
+// $icons: (
+//    my-icon,
+//    my-other-icon
+//  )
+//
+// It can be smart to keep a naming system for icon color and size, ie.
+// my-icon-blue-24 (icon blue 24px height)
+// my-icon-gray-16 (icon gray 16px height)
+
+$icons: (
+//  icon-name
+);
+
+.icon {
+  vertical-align: middle;
+}
+
+.icon--right {
+  float: right;
+}
+
+%icon {
+  display: inline-block;
+
+  @include retina-sprite-bg;
+}
+
+@each $icon in $icons {
+  .icon--#{$icon} {
+    @extend %icon;
+
+    @include retina-sprite-icon($icon);
+  }
+}

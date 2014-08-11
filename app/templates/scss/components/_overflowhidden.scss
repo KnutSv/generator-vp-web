@@ -1,0 +1,12 @@
+@mixin overflowhidden {
+  overflow: hidden;
+
+  @include for-legacy-browser('ie', '6', '7') {
+    _overflow: visible;
+    zoom: 1;
+  }
+}
+
+%overflowhidden {
+  @include overflowhidden;
+}

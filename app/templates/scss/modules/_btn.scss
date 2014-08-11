@@ -1,0 +1,71 @@
+button,
+.btn {
+  display: inline-block;
+  padding: rhythm(1, $base-font-size, 2) rhythm(2);
+  background-color: transparent;
+
+  @include adjust-leading-to(3);
+
+  &,
+  &:visited {
+    border-width: 1px 1px 3px;
+    border-style: solid;
+    border-color: $gray-btn-border;
+  
+    &:hover,
+    &:focus {
+      border-color: $blue;
+    }
+  }
+
+  &:focus {
+    outline: 1px solid $blue;
+  }
+}
+
+.btn--primary {
+  background-color: $blue;
+
+  &,
+  &:visited {
+    border-color: darken($blue, 10%);
+    color: $white;
+  
+    &:hover,
+    &:focus {
+      border-color: darken($blue, 20%);
+      background-color: darken($blue, 10%);
+    }
+  }
+}
+
+.btn--disabled {
+  cursor: default;
+
+  &:hover,
+  &:focus {
+    border-color: $gray-btn-border;
+  }
+
+  @include opacity(.3);
+
+}
+
+.btn--primary.btn--disabled {
+  &:hover,
+  &:focus {
+    border-color: $blue;
+  }
+}
+
+.btn--fullwidth {
+  display: block;
+}
+
+.btn--large {
+  $btn--large-font-size: 18px;
+
+  padding: rhythm(2, $btn--large-font-size, 1);
+
+  @include adjust-font-size-to($btn--large-font-size, 3);
+}

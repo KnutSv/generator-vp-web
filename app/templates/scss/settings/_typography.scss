@@ -1,0 +1,24 @@
+// The default font family.
+$base-font-family-roman:      Georgia, Times, "Times New Roman", serif;
+$base-font-family-sans-serif: "Helvetica Neue", Helvetica, Arial, sans-serif;
+$base-font-family-small:      Verdana, Geneva, sans-serif;
+
+$base-font-family:           $base-font-family-sans-serif;
+$base-font-family-headers:   $base-font-family-sans-serif;
+
+// The base font size.
+$base-font-size:        16px; // Override default set in Compass' Vertical Rhythm partial.
+$base-font-size--small: 12px;
+
+// The base line height determines the basic unit of vertical rhythm.
+$base-line-height:      8px; // Override default set in Compass' Vertical Rhythm partial.
+
+// The font sizes for h1-h6.
+$h1-font-size: 2      * $base-font-size;
+$h2-font-size: 1.25   * $base-font-size;
+$h3-font-size: 1.125  * $base-font-size;
+$h4-font-size: 1      * $base-font-size;
+$h5-font-size: 0.83   * $base-font-size;
+$h6-font-size: 0.67   * $base-font-size;
+
+$default-border-radius: 0;

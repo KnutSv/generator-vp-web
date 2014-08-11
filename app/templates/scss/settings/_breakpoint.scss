@@ -1,0 +1,7 @@
+// create $breakpoint variables like so
+// assume min-width (by default) if only a number
+$medium: 500px;
+$large: 800px;
+
+$breakpoint-medium: $medium;
+$breakpoint-large: $large;

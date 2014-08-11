@@ -1,0 +1,23 @@
+/**
+ * Ref: http://nicolasgallagher.com/micro-clearfix-hack/
+ */
+
+@mixin clearfix {
+  @include for-legacy-browser('ie', '6', '7') {
+    *zoom: 1;
+  }
+
+  &:before,
+  &:after {
+    content: " ";
+    display: table;
+  }
+
+  &:after {
+    clear: both;
+  }
+}
+
+%clearfix {
+  @include clearfix;
+}

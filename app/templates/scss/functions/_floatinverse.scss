@@ -1,0 +1,8 @@
+@function floatinverse($float) {
+  @if $float == left {
+    @return right;
+  }
+  @else {
+    @return left;
+  }
+}

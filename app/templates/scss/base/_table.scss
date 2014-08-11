@@ -1,0 +1,21 @@
+table {
+  border: 1px solid $gray;
+  border-collapse: collapse;
+}
+
+  caption {
+    @extend h3;
+
+    margin-bottom: rhythm(1, $h3-font-size);
+    text-align: left;
+  }
+
+  th,
+  td {
+    border: 1px solid $gray;
+    padding: rhythm(1);
+  }
+
+  th {
+    background-color: $light-gray;
+  }

@@ -1,0 +1,26 @@
+@mixin white-link-content {
+  &,
+  &:visited {
+    color: $white;
+    border-bottom-color: darken($white, 40%);
+
+    &:hover,
+    &:focus {
+      border-bottom-color: $white;
+    }
+  }
+}
+
+@mixin white-link {
+  a {
+    @include white-link-content;
+  }
+}
+
+%white-link-content {
+  @include white-link-content;
+}
+
+%white-link {
+  @include white-link;
+}

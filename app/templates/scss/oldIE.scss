@@ -1,0 +1,10 @@
+$breakpoint-default-media: screen;
+$breakpoint-no-queries: true;
+$breakpoint-no-query-fallbacks: true;
+$breakpoint-to-ems: true;
+
+$browser-minimum-versions: (
+  'ie':      '6'
+);
+
+@import "imports";

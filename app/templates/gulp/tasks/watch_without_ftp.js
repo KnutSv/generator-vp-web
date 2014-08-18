@@ -4,13 +4,7 @@ var cache = require('gulp-cached');
 var notify = require("gulp-notify");
 var svg2png = require('gulp-svg2png');
 var svgmin = require('gulp-svgmin');
-var gulpif = require('gulp-if');
 var notify = require("gulp-notify");
-var ftp = require('gulp-ftp');
-var fs = require('fs');
-var ftpConfig = JSON.parse(JSON.minify(fs.readFileSync('./sftp-config.json', 'utf8')));
-
-var upload = true;
 
 gulp.task('watch', ['setWatch'], function() {
   
@@ -52,19 +46,5 @@ gulp.task('watch', ['setWatch'], function() {
         title: "PNG @2x",
         message: "Created: <%= file.relative %>"
       }));
-  });
-
-  watch({glob: './<%= imgLocation %>/sprite/@*.svg'}, function(files) {
-      files.pipe(gulpif(upload, ftp({
-        host: ftpConfig.host,
-        port: ftpConfig.port,
-        user: ftpConfig.user,
-        pass: ftpConfig.password,
-        remotePath: ftpConfig.remote_path
-      })))
-      .pipe(gulpif(upload, notify({
-        title: "Sprite uploaded",
-        message: "Uploaded: <%= file.relative %>"
-      })))
   });
 });

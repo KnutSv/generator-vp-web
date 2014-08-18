@@ -10,6 +10,9 @@
     "gulp-ftp": "~0.4.0",
     "node-json-minify": "~0.1.3-a",
     "gulp-cached": "~1.0.1",
-    "gulp-svg2png": "~0.3.0"
+    "gulp-svg2png": "~0.3.0",
+    "gulp-if": "^1.2.4",
+    "gulp-svgmin": "^0.4.6",
+    "gulp-watch": "^0.6.9"
   }
 }

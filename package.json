@@ -4,7 +4,11 @@
   "description": "Yeoman generator",
   "license": "MIT",
   "main": "app/index.js",
-  "repository": "KnutSv/generator-vp-web",
+  "homepage": "https://github.com/KnutSv/generator-vp-web",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KnutSv/generator-vp-web.git"
+  },
   "author": {
     "name": "Knut Svangstu",
     "email": "knut@vangenplotz.no",

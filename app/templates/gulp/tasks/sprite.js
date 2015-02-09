@@ -1,46 +1,38 @@
 var gulp = require('gulp');
-var cache = require('gulp-cached');
-var notify = require("gulp-notify");
-var svg2png = require('gulp-svg2png');
+var imagemin = require('gulp-imagemin');
+var pngquant = require('imagemin-pngquant');
 
-gulp.task('sprite', function() {
-  gulp.src('./<%= imgLocation %>/sprite/svg/**/*.svg')
-    .pipe(cache('sprite@1x', {optimizeMemory: true}))
-    //.pipe(svgmin([{removeViewBox: true}]))
-    .pipe(svg2png())
-    .pipe(gulp.dest('./<%= imgLocation %>/sprite/@1x'))
-    .pipe(notify({
-      title: "PNG @1x",
-      message: "Created: <%= file.relative %>"
-    }));
-  gulp.src('./<%= imgLocation %>/sprite/svg/**/*.svg')
-    .pipe(cache('sprite@2x', {optimizeMemory: true}))
-    //.pipe(svgmin([{removeViewBox: true}]))
-    .pipe(svg2png(2))
-    .pipe(gulp.dest('./<%= imgLocation %>/sprite/@2x'))
-    .pipe(notify({
-      title: "PNG @2x",
-      message: "Created: <%= file.relative %>"
-    }));
-});
+var spritesmith = require('gulp.spritesmith');
 
-gulp.task('inline-image', function() {
-  gulp.src('./<%= imgLocation %>/inline/svg/**/*.svg')
-    .pipe(cache('inline@1x', {optimizeMemory: true}))
-    //.pipe(svgmin([{removeViewBox: true}]))
-    .pipe(svg2png())
-    .pipe(gulp.dest('./<%= imgLocation %>/inline/@1x'))
-    .pipe(notify({
-      title: "PNG @1x",
-      message: "Created: <%= file.relative %>"
-    }));
-  gulp.src('./<%= imgLocation %>/inline/svg/**/*.svg')
-    .pipe(cache('inline@2x', {optimizeMemory: true}))
-    //.pipe(svgmin([{removeViewBox: true}]))
-    .pipe(svg2png(2))
-    .pipe(gulp.dest('./<%= imgLocation %>/inline/@2x'))
-    .pipe(notify({
-      title: "PNG @2x",
-      message: "Created: <%= file.relative %>"
-    }));
+gulp.task('sprite', ['svg1x', 'svg2x'], function () {
+
+  var spriteData1x = gulp.src('./img/sprite/@1x/*.png').pipe(spritesmith({
+    imgName: 'sprite@1x.png',
+    cssName: '_sprite1x.scss',
+    imgPath: '../img/sprite@1x.png',
+    padding: 2,
+    algorithm: 'binary-tree',
+    cssOpts: {
+      res: '1x'
+    },
+    cssTemplate: './gulp/util/scss.template.mustache'
+  }));
+
+  var spriteData2x = gulp.src('./img/sprite/@2x/*.png').pipe(spritesmith({
+    imgName: 'sprite@2x.png',
+    cssName: '_sprite2x.scss',
+    imgPath: '../img/sprite@2x.png',
+    padding: 2,
+    algorithm: 'binary-tree',
+    cssOpts: {
+      res: '2x'
+    },
+    cssTemplate: './gulp/util/scss.template.mustache'
+  }));
+
+  spriteData1x.img.pipe(imagemin({use: [pngquant({ quality: '65-80' })]})).pipe(gulp.dest('./src/img/'));
+  spriteData1x.css.pipe(gulp.dest('./scss/data/'));
+  spriteData2x.img.pipe(imagemin({use: [pngquant({ quality: '65-80' })]})).pipe(gulp.dest('./src/img/'));
+  spriteData2x.css.pipe(gulp.dest('./scss/data/'));
+
 });

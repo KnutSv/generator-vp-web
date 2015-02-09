@@ -26,25 +26,21 @@ $media-default-spacing: rhythm() !default;
 }
 
 @mixin media($directions: $media-default-direction, $spacing: $media-default-spacing, $default-direction: $media-default-direction){
+  &,
+  &__bd {
+    @include media__bd;
+  }
 
-  @at-root {
-
-    &,
-    &__bd {
-      @include media__bd;
-    }
-
-    
-    @each $direction in $directions {
-      @if length($directions) > 1 and $direction != $default-direction {
-        &__img--#{$direction} {
-          @include media__img($direction, $spacing, true);
-        }
+  
+  @each $direction in $directions {
+    @if length($directions) > 1 and $direction != $default-direction {
+      &__img--#{$direction} {
+        @include media__img($direction, $spacing, true);
       }
-      @else {
-        &__img {
-          @include media__img($direction, $spacing);
-        }
+    }
+    @else {
+      &__img {
+        @include media__img($direction, $spacing);
       }
     }
   }

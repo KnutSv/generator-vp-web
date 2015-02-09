@@ -22,9 +22,10 @@ var VpWebGenerator = yeoman.generators.Base.extend({
 
       // Now you can bind to the dependencies installed event
       this.on('dependenciesInstalled', function() {
-        this.spawnCommand('gem', ['install']);
+        this.spawnCommand('npm', ['install']);
+        this.spawnCommand('bower', ['install']);
         this.spawnCommand('gulp', ['sprite']);
-        this.spawnCommand('gulp', ['compass']);
+        this.spawnCommand('gulp', ['sass']);
         this.spawnCommand('gulp', ['watch']);
       });
 
@@ -83,16 +84,16 @@ var VpWebGenerator = yeoman.generators.Base.extend({
       type: 'input',
       name: 'ftpRemotePath',
       message: 'What\'s the ftp remote path?'
-    }, {
-      type: 'input',
-      name: 'cssLocation',
-      message: 'What\'s the CSS location relative to this project\'s root? (without / at the end)',
-      default: 'app/css'
-    }, {
-      type: 'input',
-      name: 'imgLocation',
-      message: 'What\'s the image location relative to this project\'s root? (without / at the end)',
-      default: 'app/img'
+    // }, {
+    //   type: 'input',
+    //   name: 'cssLocation',
+    //   message: 'What\'s the CSS location relative to this project\'s root? (without / at the end)',
+    //   default: 'app/css'
+    // }, {
+    //   type: 'input',
+    //   name: 'imgLocation',
+    //   message: 'What\'s the image location relative to this project\'s root? (without / at the end)',
+    //   default: 'app/img'
     }];
 
     this.prompt(prompts, function (props) {
@@ -119,29 +120,13 @@ var VpWebGenerator = yeoman.generators.Base.extend({
   },
 
   app: function () {
-    this.mkdir( this.imgLocation + '/sprite/svg/', '0777', true, function (err) {
-      if (err) {
-        this.log(err);
-      } else {
-        this.log('Directory "' + this.imgLocation + '/sprite/svg/" created');
-      }
-    });
-    this.mkdir( this.imgLocation + '/inline/svg/', '0777', true, function (err) {
-      if (err) {
-        this.log(err);
-      } else {
-        this.log('Directory "' + this.imgLocation + '/inline/svg/" created');
-      }
-    });
-
     this.template('_package.json', 'package.json');
-    this.copy('_bower.json', 'bower.json');
+    this.template('_bower.json', 'bower.json');
     this.template('_sftp-config.json', 'sftp-config.json');
-    this.copy('Gemfile');
-    this.template('_config.rb', 'config.rb');
     this.copy('gulpfile.js');
     this.directory('scss');
     this.directory('js');
+    this.directory('img');
 
     this.mkdir('gulp');
     this.mkdir('gulp/util');
@@ -149,18 +134,16 @@ var VpWebGenerator = yeoman.generators.Base.extend({
     this.copy('gulp/index.js');
     this.copy('gulp/util/scriptFilter.js');
     this.copy('gulp/tasks/setWatch.js');
+    this.copy('gulp/tasks/svg.js');
     this.template('gulp/tasks/sprite.js');
+    this.template('gulp/tasks/watch.js');
 
     if(this.autoUpload) {
-      this.template('gulp/tasks/compass.js');
-      this.template('gulp/tasks/watch.js');
+      this.template('gulp/tasks/sass.js');
     }
     else {
-      this.template('gulp/tasks/compass_without_ftp.js', 'gulp/tasks/compass.js');
-      this.template('gulp/tasks/watch_without_ftp.js', 'gulp/tasks/watch.js');
+      this.template('gulp/tasks/sass_without_ftp.js', 'gulp/tasks/sass.js');
     }
-
-    this.directory('svg', this.imgLocation + '/sprite/svg/');
   },
 
   projectfiles: function () {

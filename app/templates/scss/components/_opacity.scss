@@ -1,9 +1,11 @@
 @mixin opacity($opacity) {
   @if $opacity {
-    @include for-legacy-browser('ie', '6', '8') {
+    @if $legacy-support-for-ie8 {
       /* IE 8 */
       -ms-filter: unquote("progid:DXImageTransform.Microsoft.Alpha(Opacity=#{round($opacity * 100)})");
+    }
 
+    @if $legacy-support-for-ie6 or $legacy-support-for-ie7 {
       /* IE 5-7 */
       filter: alpha(opacity=50);
     }

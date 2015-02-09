@@ -30,7 +30,7 @@ $input-text-types: text search password email number !default;
 %input-text-fullwidth {
   width: 100%;
 
-  @include box-sizing(border-box);
+  box-sizing: border-box;
 }
 
 @each $input-text-type in $input-text-types {
@@ -42,7 +42,7 @@ $input-text-types: text search password email number !default;
 // Use if IE6 support is needed
 // IE6 does not support CSS-type selectors
 // Requires ".input-text"-class to be added in markup
-@include for-legacy-browser('ie', '6') {
+@if $legacy-support-for-ie6 {
   .input-text {
     @extend %input-text;
   }

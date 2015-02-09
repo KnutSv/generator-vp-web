@@ -3,8 +3,17 @@ $breakpoint-no-queries: true;
 $breakpoint-no-query-fallbacks: true;
 $breakpoint-to-ems: true;
 
-$browser-minimum-versions: (
-  'ie':      '6'
-);
+$legacy-support-for-ie6: true;
+$legacy-support-for-ie7: true;
+$legacy-support-for-ie8: true;
 
-@import "imports";
+@import "../bower_components/compass-breakpoint/stylesheets/breakpoint";
+@import "../bower_components/susy/sass/susy";
+
+@import "data/*";
+
+@import "functions/*";
+@import "settings/*";
+@import "components/*";
+@import "base/*";
+@import "modules/*";

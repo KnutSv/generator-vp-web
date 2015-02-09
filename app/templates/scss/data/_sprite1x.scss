@@ -1,0 +1,21 @@
+$sprite1x: (
+    caret-down-black-24: (
+      image: '../img/sprite@1x.png',
+      offset-x: 0px,
+      offset-y: 0px,
+      icon-width: 24px,
+      icon-height: 24px,
+      sprite-width: 50px,
+      sprite-height: 24px
+    ),
+    caret-down-white-24: (
+      image: '../img/sprite@1x.png',
+      offset-x: -26px,
+      offset-y: 0px,
+      icon-width: 24px,
+      icon-height: 24px,
+      sprite-width: 50px,
+      sprite-height: 24px
+    ),
+    _end_: ()
+);

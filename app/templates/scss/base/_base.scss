@@ -32,18 +32,6 @@ $h6-font-size: 0.67 * $base-font-size !default;
 // The amount lists and blockquotes are indented.
 $indent-amount: 40px !default;
 
-// Set this to true to add support for IE 6.
-$legacy-support-for-ie6: false !default; // Override default set in Compass' Support partial.
-
-// Set this to true to add support for IE 7.
-$legacy-support-for-ie7: false !default; // Override default set in Compass' Support partial.
-
-// After the default variables are set, import the required Compass partials.
-@import "compass/support";
-@import "compass/css3/box-sizing";
-@import "compass/typography/vertical_rhythm";
-
-
 /* ==========================================================================
    HTML5 display definitions
    ========================================================================== */
@@ -322,8 +310,7 @@ hr {
     border-style: solid;
     border-color: $gray;
     height: 0;
-
-    @include box-sizing(content-box);
+    box-sizing: content-box;
 }
 
 /**
@@ -631,7 +618,7 @@ html input[disabled] {
 
 input[type="checkbox"],
 input[type="radio"] {
-    @include box-sizing(border-box); /* 1 */
+    box-sizing: border-box; /* 1 */
     padding: 0; /* 2 */
     @if $legacy-support-for-ie7 {
         *height: 13px; /* 3 */
@@ -647,7 +634,7 @@ input[type="radio"] {
 
 input[type="search"] {
     -webkit-appearance: textfield; /* 1 */
-    @include box-sizing(border-box); /* 2 */
+    box-sizing: border-box; /* 2 */
 }
 
 /**

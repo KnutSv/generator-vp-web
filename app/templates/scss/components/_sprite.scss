@@ -1,0 +1,147 @@
+
+
+@mixin sprite($icon) {
+  @include _sprite($icon, $sprite1x, $sprite2x);
+}
+
+@mixin sprite-icon($icon) {
+  @include _sprite-icon($icon, $sprite1x, $sprite2x);
+}
+
+@mixin sprite-bg {
+  @include _sprite-bg($sprite1x, $sprite2x);
+}
+
+
+@function sprite-has-img($sprite) {
+  @return (length($sprite) > 1);
+}
+
+@function sprite-url($sprite) {
+  @if sprite-has-img($sprite) {
+    $sprite-keys: map-keys($sprite);
+    $first-sprite: map-get($sprite, nth($sprite-keys, 1));
+    $spritesheet-image: map-get($first-sprite, image);
+
+    @return $spritesheet-image;
+  }
+  @else {
+    @warn "Trying to get sprite URL, but no sprite available."
+    return "../img/idontexist.png";
+  }
+}
+
+@function sprite-width($sprite) {
+  @if sprite-has-img($sprite) {
+    @return map-fetch($sprite, nth(map-keys($sprite), 1) sprite-width);
+    //@return map-get(map-get($sprite, nth(map-keys($sprite), 1)), sprite-width);
+  }
+  @else {
+    @warn "Trying to get sprite width, but no sprite available."
+    return 0px;
+  }
+}
+
+@function icon-width($sprite, $icon) {
+  @if sprite-has-img($sprite) {
+    @return map-fetch($sprite, $icon icon-width);
+    //@return map-get(map-get($sprite, $icon), icon-width);
+  }
+  @else {
+    @warn "Trying to get icon width, but no sprite available."
+    return 0px;
+  }
+}
+
+@function icon-height($sprite, $icon) {
+  @if sprite-has-img($sprite) {
+    @return map-fetch($sprite, $icon icon-height);
+    //@return map-get(map-get($sprite, $icon), icon-height);
+  }
+  @else {
+    @warn "Trying to get icon height, but no sprite available."
+    return 0px;
+  }
+}
+
+@function icon-position($sprite, $icon, $modifier: 1) {
+  @if sprite-has-img($sprite) {
+    @return #{strip-units(map-fetch($sprite, $icon offset-x)) / $modifier}px #{strip-units(map-fetch($sprite, $icon offset-y)) / $modifier}px;
+    //@return #{strip-units(map-get(map-get($sprite, $icon), offset-x)) / $modifier}px #{strip-units(map-get(map-get($sprite, $icon), offset-y)) / $modifier}px;
+  }
+  @else {
+    @warn "Trying to get icon position, but no sprite available."
+    return 0px 0px;
+  }
+}
+
+@mixin sprite-dimensions($sprite, $icon) {
+  width: icon-width($sprite, $icon);
+  height: icon-width($sprite, $icon);
+}
+
+@mixin sprite-retina {
+  @media (-webkit-min-device-pixel-ratio: 1.5), (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3/2), (min-device-pixel-ratio: 1.5), (min-resolution: 144dppx) {
+    @content;
+  }
+}
+
+@mixin _sprite-bg($sprite, $sprite2x) {
+  @if sprite-has-img($sprite) {
+    background-image: sprite-url($sprite);
+    background-repeat: no-repeat;
+    
+    @if sprite-has-img($sprite2x) {
+      @include sprite-retina {
+        & {
+          background-image: sprite-url($sprite2x);
+
+          background-size: #{ceil(sprite-width($sprite2x) / 2)} auto;
+          //  sprite-width() gets the sprite width in pixels
+          //  you have sprites that have an odd-number of pixels in width
+          
+        }
+      }
+    }
+  }
+}
+
+@mixin _sprite-icon($icon, $sprite, $sprite2x, $dimensions: true) {
+  @if sprite-has-img($sprite) {
+    @if $dimensions == true {
+      @include sprite-dimensions($sprite, $icon);
+    }
+
+    background-position: icon-position($sprite, $icon);
+    
+    @if sprite-has-img($sprite2x) {
+      @include sprite-retina {
+        & {
+          background-position: icon-position($sprite2x, $icon, 2);
+          // Modifier divides by 2 so that postion works with screen pixels
+        }
+      }
+    }
+  }
+}
+
+@mixin _sprite($icon, $sprite, $sprite2x, $dimensions: true) {
+  @if sprite-has-img($sprite) {
+    @if $dimensions == true {
+      @include sprite-dimensions($sprite, $icon);
+    }
+    background-image: sprite-url($sprite);
+    background-position: icon-position($sprite, $icon);
+    background-repeat: no-repeat;
+    
+    @if sprite-has-img($sprite2x) {
+      @include sprite-retina {
+        & {
+          background-image: sprite-url($sprite2x);
+          background-position: icon-position($sprite2x, $icon, 2);
+          background-size: #{ceil(sprite-width($sprite2x) / 2)} auto;
+        }
+      }
+    }
+  }
+}

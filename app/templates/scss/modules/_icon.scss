@@ -17,7 +17,8 @@
 // my-icon-gray-16 (icon gray 16px height)
 
 $icons: (
-//  icon-name
+  caret-down-black-24,
+  caret-down-white-24
 );
 
 .icon {
@@ -31,13 +32,13 @@ $icons: (
 %icon {
   display: inline-block;
 
-  @include retina-sprite-bg;
+  @include sprite-bg;
 }
 
 @each $icon in $icons {
   .icon--#{$icon} {
     @extend %icon;
 
-    @include retina-sprite-icon($icon);
+    @include sprite-icon($icon);
   }
 }

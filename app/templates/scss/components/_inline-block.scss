@@ -3,7 +3,7 @@
 @mixin inline-block {
   display: inline-block;
 
-  @include for-legacy-browser('ie', '6', '7') {
+  @if $legacy-support-for-ie6 or $legacy-support-for-ie7 {
     *display: inline;
     zoom: 1;
   }

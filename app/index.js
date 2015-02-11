@@ -134,6 +134,7 @@ var VpWebGenerator = yeoman.generators.Base.extend({
     this.copy('gulp/index.js');
     this.copy('gulp/util/scriptFilter.js');
     this.copy('gulp/tasks/setWatch.js');
+    this.copy('gulp/tasks/scss.template.mustache.js');
     this.copy('gulp/tasks/svg.js');
     this.template('gulp/tasks/sprite.js');
     this.template('gulp/tasks/watch.js');

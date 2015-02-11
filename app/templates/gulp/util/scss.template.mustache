@@ -1,0 +1,19 @@
+{
+  // Default options
+  'functions': true
+}
+
+$sprite{{options.res}}: (
+  {{#items}}
+    {{name}}: (
+      image: '{{{escaped_image}}}',
+      offset-x: {{px.offset_x}},
+      offset-y: {{px.offset_y}},
+      icon-width: {{px.width}},
+      icon-height: {{px.height}},
+      sprite-width: {{px.total_width}},
+      sprite-height: {{px.total_height}}
+    ),
+  {{/items}}
+    _end_: ()
+);

@@ -10,6 +10,7 @@ var fs = require('fs');
 var ftp = require('gulp-ftp');
 var ftpConfig = JSON.parse(JSON.minify(fs.readFileSync('./sftp-config.json', 'utf8')));
 var gulp = require('gulp');
+var gulpif = require('gulp-if');
 var notify = require("gulp-notify");
 var rev = require('gulp-rev');
 var revall = require('gulp-rev-all');

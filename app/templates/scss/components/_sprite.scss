@@ -88,13 +88,13 @@
 
 @mixin _sprite-bg($sprite, $sprite2x) {
   @if sprite-has-img($sprite) {
-    background-image: sprite-url($sprite);
+    background-image: url('#{sprite-url($sprite)}');
     background-repeat: no-repeat;
     
     @if sprite-has-img($sprite2x) {
       @include sprite-retina {
         & {
-          background-image: sprite-url($sprite2x);
+          background-image: url('#{sprite-url($sprite2x)}');
 
           background-size: #{ceil(sprite-width($sprite2x) / 2)} auto;
           //  sprite-width() gets the sprite width in pixels
@@ -130,14 +130,14 @@
     @if $dimensions == true {
       @include sprite-dimensions($sprite, $icon);
     }
-    background-image: sprite-url($sprite);
+    background-image: url('#{sprite-url($sprite)}');
     background-position: icon-position($sprite, $icon);
     background-repeat: no-repeat;
     
     @if sprite-has-img($sprite2x) {
       @include sprite-retina {
         & {
-          background-image: sprite-url($sprite2x);
+          background-image: url('#{sprite-url($sprite2x)}');
           background-position: icon-position($sprite2x, $icon, 2);
           background-size: #{ceil(sprite-width($sprite2x) / 2)} auto;
         }

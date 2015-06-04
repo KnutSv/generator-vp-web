@@ -10,24 +10,31 @@ var rev = require('gulp-rev');
 var revall = require('gulp-rev-all');
 var sass = require('gulp-sass');
 var sourcemaps = require('gulp-sourcemaps');
+var plumber = require('gulp-plumber');
+var util = require('gulp-util');
 
 gulp.task('sass_compile', function() {
 
   return gulp.src('./scss/*.scss')
+    .pipe(plumber({
+      errorHandler: function(error) {
+        util.log(
+          util.colors.cyan('Plumber') + util.colors.red(' found unhandled error:\n'),
+          error.toString()
+        );
+        this.emit('end');
+      }
+    }))
     .pipe(bulkSass())
-    //.pipe(sourcemaps.init()) // Not working w/bulkSass
+    //.pipe(sourcemaps.init()) // Uncomment for sourcemaps
     .pipe(sass())
     .pipe(autoprefixer())
     .pipe(cmq({
       log: true
     }))
     //.pipe(csso()) // Uncomment for production
-    //.pipe(sourcemaps.write(gulp.dest('app/css')))
-    .on("error", notify.onError({
-      message: "<%= error.message %>",
-      title: "Error CSS"
-    }))
-    .pipe(gulp.dest('src/css'))
+    //.pipe(sourcemaps.write()) // Uncomment for sourcemaps
+    .pipe(plumber.stop())
     .pipe(notify({
       title: "CSS",
       message: "Generated: <%= file.relative %>"

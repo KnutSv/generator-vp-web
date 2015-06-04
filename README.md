@@ -35,6 +35,12 @@ Finally, initiate the generator:
 $ yo vp-web
 ```
 
+## Using the generator
+Generate the files by running `gulp`
+
+To watch the files run `gulp watch`. This will watch the 'scss', 'img', and 'js'.
+
+
 ### Getting To Know Yeoman
 
 Yeoman has a heart of gold. He's a person with feelings and opinions, but he's very easy to work with. If you think he's too opinionated, he can be easily convinced.

@@ -37,3 +37,8 @@ sftp-config.json
 
 # System
 .DS_Store
+
+# Generated files
+scss/data
+img/sprite/@1x
+img/sprite/@2x

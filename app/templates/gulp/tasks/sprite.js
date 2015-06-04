@@ -30,9 +30,9 @@ gulp.task('sprite', ['svg1x', 'svg2x'], function () {
     cssTemplate: './gulp/util/scss.template.mustache'
   }));
 
-  spriteData1x.img.pipe(imagemin({use: [pngquant({ quality: '65-80' })]})).pipe(gulp.dest('./src/img/'));
+  spriteData1x.img.pipe(imagemin({use: [pngquant({ quality: '65-80' })]})).pipe(gulp.dest('./src/<%= imgFolder %>/'));
   spriteData1x.css.pipe(gulp.dest('./scss/data/'));
-  spriteData2x.img.pipe(imagemin({use: [pngquant({ quality: '65-80' })]})).pipe(gulp.dest('./src/img/'));
+  spriteData2x.img.pipe(imagemin({use: [pngquant({ quality: '65-80' })]})).pipe(gulp.dest('./src/<%= imgFolder %>/'));
   spriteData2x.css.pipe(gulp.dest('./scss/data/'));
 
 });

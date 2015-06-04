@@ -24,9 +24,7 @@ var VpWebGenerator = yeoman.generators.Base.extend({
       this.on('dependenciesInstalled', function() {
         this.spawnCommand('npm', ['install']);
         this.spawnCommand('bower', ['install']);
-        this.spawnCommand('gulp', ['sprite']);
-        this.spawnCommand('gulp', ['sass']);
-        this.spawnCommand('gulp', ['watch']);
+        this.spawnCommand('gulp');
       });
 
       }
@@ -84,23 +82,35 @@ var VpWebGenerator = yeoman.generators.Base.extend({
       type: 'input',
       name: 'ftpRemotePath',
       message: 'What\'s the ftp remote path?'
-    // }, {
-    //   type: 'input',
-    //   name: 'cssLocation',
-    //   message: 'What\'s the CSS location relative to this project\'s root? (without / at the end)',
-    //   default: 'app/css'
-    // }, {
-    //   type: 'input',
-    //   name: 'imgLocation',
-    //   message: 'What\'s the image location relative to this project\'s root? (without / at the end)',
-    //   default: 'app/img'
+      }, {
+      type: 'input',
+      name: 'publicFolder',
+      message: 'What\'s the public folder where the generated assets will be placed?',
+      default: 'public_html'
+      }, {
+      type: 'input',
+      name: 'cssFolder',
+      message: 'What\'s the CSS folder name?',
+      default: 'css'
+      }, {
+      type: 'input',
+      name: 'imgFolder',
+      message: 'What\'s the image folder name?',
+      default: 'img'
+      }, {
+      type: 'input',
+      name: 'jsFolder',
+      message: 'What\'s the javascript folder name?',
+      default: 'js'
     }];
 
     this.prompt(prompts, function (props) {
       this.appname = props.appname;
       this.autoUpload = props.autoUpload;
-      this.cssLocation = props.cssLocation;
-      this.imgLocation = props.imgLocation;
+      this.publicFolder = props.publicFolder;
+      this.cssFolder = props.cssFolder;
+      this.imgFolder = props.imgFolder;
+      this.jsFolder = props.jsFolder;
       this.ftpHost = props.ftpHost;
       this.ftpUser = props.ftpUser;
       this.ftpPW = props.ftpPW;
@@ -136,6 +146,8 @@ var VpWebGenerator = yeoman.generators.Base.extend({
     this.copy('gulp/util/scss.template.mustache');
     this.copy('gulp/tasks/setWatch.js');
     this.copy('gulp/tasks/svg.js');
+    this.copy('gulp/tasks/default.js');
+    this.template('gulp/tasks/js.js');
     this.template('gulp/tasks/sprite.js');
     this.template('gulp/tasks/watch.js');
 

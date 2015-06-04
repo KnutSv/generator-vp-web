@@ -43,6 +43,7 @@ gulp.task('sass_compile', function() {
     //.pipe(csso()) // Uncomment for production
     //.pipe(sourcemaps.write()) // Uncomment for sourcemaps
     .pipe(plumber.stop())
+    .pipe(gulp.dest('src/<%= cssFolder %>'))
     .pipe(notify({
       title: "CSS",
       message: "Generated: <%= file.relative %>"
@@ -51,15 +52,15 @@ gulp.task('sass_compile', function() {
 });
 
 gulp.task('sass_clean_sprites', function() {
-  del(['app/img/sprite@*.png']);
+  del(['<%= publicFolder %>/img/sprite@*.png']);
 });
 
 gulp.task('sass', ['sass_compile', 'sass_clean_sprites'], function() {
   var pngFilter = filter("**/*.png");
 
-  return gulp.src(['src/css/*.css', 'src/img/*.png'], { base: 'src' })
+  return gulp.src(['src/<%= cssFolder %>/*.css', 'src/<%= imgFolder %>/*.png'], { base: 'src' })
     .pipe(revall({ ignore: ['.css'] }))
-    .pipe(gulp.dest('app'))
+    .pipe(gulp.dest('<%= publicFolder %>'))
     .pipe(gulpif(upload, ftp({
       host: ftpConfig.host,
       port: ftpConfig.port,

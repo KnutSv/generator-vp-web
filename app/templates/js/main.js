@@ -1,44 +1,28 @@
-// Global variables attached to object namespace to avoid conflicts
-// Remember to use CamelCase to name attributes
-//
-// var mainVars = {
-//   exampleOption: 'example value'
-// };
-//
-// Retrieve value like this:
-// mainVars.exampleOption
-
-var mainVars = {
-  shareLink: '.js--share-link-popup'
-};
-
 // Enclosed function that prevents conflicts with the global namespace
 // All variables used in the function need to be fed in through the last parenthesis
 // and added to the function parameteres in the same order
 
-(function($, mainVars) {
+(function($) {
   'use strict';
 
   $(document).ready(function(){
 
     // Add code here that you want to run when the DOM is ready
 
-
-
     // SOCIAL MEDIA
     // Lauch share links in pop-up-window
-    $( hihmVars.shareLink ).click( function( event ){
-      event.preventDefault();
-      window.open(
-        $( this ).attr( 'href' ),
-        'share-box__link',
-        'width=626,height=436'
-      );
-    });
+    //$( '.js--share-link-popup' ).click( function( event ){
+    //  event.preventDefault();
+    //  window.open(
+    //    $( this ).attr( 'href' ),
+    //    'share-box__link',
+    //    'width=626,height=436'
+    //  );
+    //});
 
   });
 
-})(jQuery, mainVars);
+})(jQuery);
 
 
 // Use code bellow to create a simple jQuery plugin

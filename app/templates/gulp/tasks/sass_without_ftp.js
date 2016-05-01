@@ -1,10 +1,10 @@
 var autoprefixer = require('gulp-autoprefixer');
 var bulkSass = require('gulp-sass-bulk-import');
-var cmq = require('gulp-combine-media-queries');
 var csso = require('gulp-csso');
 var del = require('del');
 var filter = require('gulp-filter');
 var gulp = require('gulp');
+var mmq = require('gulp-merge-media-queries');
 var notify = require("gulp-notify");
 var rev = require('gulp-rev');
 var revall = require('gulp-rev-all');
@@ -29,7 +29,7 @@ gulp.task('sass_compile', function() {
     //.pipe(sourcemaps.init()) // Uncomment for sourcemaps
     .pipe(sass())
     .pipe(autoprefixer())
-    .pipe(cmq({
+    .pipe(mmq({
       log: true
     }))
     //.pipe(csso()) // Uncomment for production

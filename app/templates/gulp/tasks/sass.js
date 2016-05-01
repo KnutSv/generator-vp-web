@@ -2,7 +2,6 @@ JSON.minify = JSON.minify || require("node-json-minify");
 
 var autoprefixer = require('gulp-autoprefixer');
 var bulkSass = require('gulp-sass-bulk-import');
-var cmq = require('gulp-combine-media-queries');
 var csso = require('gulp-csso');
 var del = require('del');
 var filter = require('gulp-filter');
@@ -11,6 +10,7 @@ var ftp = require('gulp-ftp');
 var ftpConfig = JSON.parse(JSON.minify(fs.readFileSync('./sftp-config.json', 'utf8')));
 var gulp = require('gulp');
 var gulpif = require('gulp-if');
+var mmq = require('gulp-merge-media-queries');
 var notify = require("gulp-notify");
 var rev = require('gulp-rev');
 var revall = require('gulp-rev-all');
@@ -37,7 +37,7 @@ gulp.task('sass_compile', function() {
     //.pipe(sourcemaps.init()) // Uncomment for sourcemaps
     .pipe(sass())
     .pipe(autoprefixer())
-    .pipe(cmq({
+    .pipe(mmq({
       log: true
     }))
     //.pipe(csso()) // Uncomment for production
